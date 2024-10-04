@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Data</title>
+</head>
+<body>
+    <h1>Submit Your Data</h1>
+    <form id="dataForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        document.getElementById('dataForm').onsubmit = async (event) => {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+
+            const response = await fetch('https://p32gfj50li.execute-api.us-east-1.amazonaws.com/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name })
+            });
+
+            const result = await response.json();
+            alert(result.body);
+        };
+    </script>
+</body>
+</html>
+
